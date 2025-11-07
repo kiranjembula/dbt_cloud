@@ -12,7 +12,7 @@ with source_orders as (
         status,
         updated_at,
         total_amount
-    from {{ source('dbt_cloud', 'orders') }}
+    from {{ source('dbt_cloud.raw_schema', 'orders') }}
 
 ),
 
