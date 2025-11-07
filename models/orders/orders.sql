@@ -1,17 +1,16 @@
 {{ config(
     materialized = 'incremental',
-    unique_key   = 'order_id'
+    unique_key   = 'ORDER_ID'
 ) }}
 
 with source_orders as (
 
     select
-        order_id,
-        customer_id,
-        order_date,
-        status,
-        updated_at,
-        total_amount
+        ORDER_ID,
+        CUSTOMER_ID,
+        ORDER_DATE,
+        UPDATED_AT,
+        TOTAL_AMOUNT
     from {{ source('snowflake_raw', 'ORDERS') }}
 
 ),
@@ -19,16 +18,15 @@ with source_orders as (
 filtered as (
 
     select
-        order_id,
-        customer_id,
-        order_date,
-        status,
-        updated_at,
-        total_amount
+        ORDER_ID,
+        CUSTOMER_ID,
+        ORDER_DATE,
+        UPDATED_AT,
+        TOTAL_AMOUNT
     from source_orders
     {% if is_incremental() %}
-      where updated_at > (
-        select coalesce(max(updated_at), '1900-01-01') from {{ this }}
+      where UPDATED_AT > (
+        select coalesce(max(UPDATED_AT), '1900-01-01') from {{ this }}
       )
     {% endif %}
 
