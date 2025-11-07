@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: snowflake_raw
+    database: DBT_CLOUD          # ← replace with your actual database name
+    schema: RAW_SCHEMA           # ← replace if ORDERS is in a different schema
+    tables:
+      - name: ORDERS
