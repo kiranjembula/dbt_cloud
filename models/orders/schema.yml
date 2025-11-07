@@ -1,14 +1,10 @@
-
 version: 2
 
 models:
-    - name: orders
-      description: "A starter dbt model"
-      columns:
-          - name: order_id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
-
-    
+  - name: orders
+    description: "Incremental curated orders model built from DBT_CLOUD.RAW_SCHEMA.ORDERS"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique

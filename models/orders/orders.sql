@@ -12,7 +12,7 @@ with source_orders as (
         status,
         updated_at,
         total_amount
-    from {{ source('dbt_cloud.raw_schema', 'orders') }}
+    from {{ source('snowflake_raw', 'ORDERS') }}
 
 ),
 
@@ -27,7 +27,6 @@ filtered as (
         total_amount
     from source_orders
     {% if is_incremental() %}
-      -- Only load new/changed records compared to what already exists
       where updated_at > (
         select coalesce(max(updated_at), '1900-01-01') from {{ this }}
       )
