@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: snowflake_raw
+    database: DBT_CLOUD
+    schema: RAW_SCHEMA
+    tables:
+      - name: ORDERS

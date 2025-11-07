@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: orders
+    description: "Incremental curated orders model built from DBT_CLOUD.RAW_SCHEMA.ORDERS"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
